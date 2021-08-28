@@ -83,6 +83,12 @@ namespace Api.AccountTransactions
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(config =>
+            {
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+            });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
