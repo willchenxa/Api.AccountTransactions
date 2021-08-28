@@ -1,7 +1,6 @@
 ﻿using Api.AccountTransactions.Dtos;
 using Swashbuckle.AspNetCore.Filters;
 using System.Collections.Generic;
-using Transaction = Api.AccountTransactions.Dtos.Transaction;
 
 namespace Api.AccountTransactions.Swagger
 {
@@ -83,19 +82,19 @@ namespace Api.AccountTransactions.Swagger
             }
         }
 
-        public class CreatedTransactionExample : IExamplesProvider<string>
+        public class CreatedTransactionExample : IExamplesProvider<TransactionResponse>
         {
-            public string GetExamples()
+            public TransactionResponse GetExamples()
             {
-                return Constant.TransactionResponse.CreatedSuccessful;
+                return new TransactionResponse { Message = Constant.TransactionResponse.CreatedSuccessful };
             }
         }
 
-        public class UpdateTransactionExample : IExamplesProvider<string>
+        public class UpdateTransactionExample : IExamplesProvider<TransactionResponse>
         {
-            public string GetExamples()
+            public TransactionResponse GetExamples()
             {
-                return Constant.TransactionResponse.UpdatedSucessful;
+                return new TransactionResponse { Message = Constant.TransactionResponse.UpdatedSucessful };
             }
         }
     }

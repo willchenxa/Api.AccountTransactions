@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Api.AccountTransactions.Dtos
+﻿namespace Api.AccountTransactions.Dtos
 {
     public class Transaction
     {

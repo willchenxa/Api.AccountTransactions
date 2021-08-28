@@ -1,4 +1,5 @@
-using Api.AccountTransactions.Dtos;
+using Api.AccountTransactions.Filter;
+using Api.AccountTransactions.Models;
 using Api.AccountTransactions.Services;
 using Api.AccountTransactions.Swagger;
 using Api.AccountTransactions.Validator;
@@ -7,12 +8,14 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text.Json.Serialization;
+using Api.AccountTransactions.Dtos;
 
 namespace Api.AccountTransactions
 {
@@ -28,8 +31,12 @@ namespace Api.AccountTransactions
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TransactionDbContext>(options => options.UseInMemoryDatabase("Transactions"));
+
             services
-                .AddMvc()
+                .AddMvc(options =>
+                    options.Filters.Add(typeof(ValidationFilterAttribute))
+                    )
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSwaggerGen(options =>
@@ -45,7 +52,8 @@ namespace Api.AccountTransactions
                 })
                 .AddSwaggerExamplesFromAssemblies(typeof(SwaggerExamples).Assembly);
 
-            services.AddControllers()
+            services.AddControllers(options =>
+                    options.Filters.Add(new HttpResponseExceptionFilter()))
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.IgnoreNullValues = true;
@@ -56,8 +64,15 @@ namespace Api.AccountTransactions
 
             services.AddSingleton<IValidator<Customer>, CustomerValidator>()
                 .AddSingleton<IValidator<Transaction>, TransactionValidator>()
-                .AddSingleton<ITransactionService, TransactionService>();
+                .AddScoped<ITransactionService, TransactionService>()
+                .AddScoped<ValidationFilterAttribute>();
 
+            // Authentication
+            services.AddAuthentication("Basic");
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

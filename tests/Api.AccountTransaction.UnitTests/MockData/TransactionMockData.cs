@@ -1,6 +1,5 @@
 ﻿using Api.AccountTransactions.Dtos;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace Api.AccountTransaction.UnitTests.MockData
 {
@@ -11,7 +10,7 @@ namespace Api.AccountTransaction.UnitTests.MockData
             {
                 new Transaction
                 {
-                    id = "6976fe63-c665-445b-835c-42dabe9fa3b7",
+                    id = "6976fe63-c665-445b-835c-42dabe9fa3b5",
                     fromAccount = "123456",
                     toAccount = "789123",
                     description = "First transaction description",
@@ -56,7 +55,24 @@ namespace Api.AccountTransaction.UnitTests.MockData
                 }
             };
 
-        public static Transaction CreateOrUpdateTransactionRequest =
+        public static Transaction NewTransactionRequest =
+            new Transaction
+            {
+                id = "6976fe63-c665-445b-835c-42dabe9fa3b0",
+                fromAccount = "123456",
+                toAccount = "789123",
+                description = "First transaction description",
+                amount = 123456.78,
+                date = "2016-08-29T09:12:33.001Z",
+                owner = new Customer
+                {
+                    id = "78cf59a3-3e43-4897-9bad-bfdf30b41e84",
+                    name = "John Smith"
+                }
+            };
+
+
+        public static Transaction ExistingTransactionRequest =
             new Transaction
             {
                 id = "6976fe63-c665-445b-835c-42dabe9fa3b7",
@@ -72,8 +88,11 @@ namespace Api.AccountTransaction.UnitTests.MockData
                 }
             };
 
-        public static string RequestTransactionId = "6976fe63-c665-445b-835c-42dabe9fa3b7";
+        public static string ExistingTransactionId = "6976fe63-c665-445b-835c-42dabe9fa3b7";
+        public static string NonExistenceTransactionId = "6976fe63-c665-445b-835c-42dabe9fa3b0";
         public static string CreateResponse = "Transaction created";
         public static string UpdatedResponse = "Transaction updated";
+        public static string TransactionExists = "Transaction already exists";
+        public static string TransactionDoesNotExists = "Transaction does not exist";
     }
 }

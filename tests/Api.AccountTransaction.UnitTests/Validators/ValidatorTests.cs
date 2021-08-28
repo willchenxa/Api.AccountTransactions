@@ -79,6 +79,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                         id = Guid.NewGuid().ToString(),
                         fromAccount = "123-456",
                         toAccount = "789-123",
+                        description = "Example transaction",
                         amount = 123456.78,
                         date = DateTime.UtcNow.ToString(),
                         owner = new Customer
@@ -104,7 +105,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                         amount = 123456.78,
                         date = DateTime.UtcNow.ToString()
                     },
-                    "'owner' must not be empty for Transaction."
+                    "'owner' is required"
                 },
                 new object[]
                 {
@@ -122,7 +123,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                             name = "John Smith"
                         }
                     },
-                    "'id' must not be less than 36 characters for Customer."
+                    "'id' must not be less than 36 characters for Customer"
                 },
 
                 new object[]
@@ -140,7 +141,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                             name = "John Smith"
                         }
                     },
-                    "'id' must not be empty for Transaction."
+                    "'id' is required"
                 },
                 new object[]
                 {
@@ -157,7 +158,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                             name = "John Smith"
                         }
                     },
-                    "'amount' must not be empty for Transaction."
+                    "'amount' is required"
                 },
                 new object[]
                 {
@@ -175,7 +176,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                             name = "John Smith"
                         }
                     },
-                    "'id' must not less than 36 characters for Transaction."
+                    "'id' must not less than 36 characters for Transaction"
                 }
             };
     }

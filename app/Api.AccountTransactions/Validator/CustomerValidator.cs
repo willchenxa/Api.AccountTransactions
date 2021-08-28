@@ -12,12 +12,12 @@ namespace Api.AccountTransactions.Validator
         }
         private string GetValidatorError()
         {
-            return "'{PropertyName}' must not be empty for Customer.";
+            return "'{PropertyName}' is required";
         }
 
         private string GetLengthValidatorError()
         {
-            return "'{PropertyName}' must not be less than 36 characters for Customer.";
+            return "'{PropertyName}' must not be less than 36 characters for Customer";
         }
 
     }

@@ -1,12 +1,15 @@
 using Api.AccountTransaction.UnitTests.MockData;
 using Api.AccountTransactions.Controllers;
+using Api.AccountTransactions.Dtos;
+using Api.AccountTransactions.Exception;
 using Api.AccountTransactions.Services;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using System.Linq;
+using NSubstitute.ExceptionExtensions;
+using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
 namespace Api.AccountTransaction.UnitTests
@@ -44,35 +47,72 @@ namespace Api.AccountTransaction.UnitTests
         public async Task should_return_created_response_when_post_transaction()
         {
             //arrange
-            _transactionService.CreateTransaction(TransactionMockData.CreateOrUpdateTransactionRequest)
-                .ReturnsForAnyArgs(TransactionMockData.CreateResponse);
+            _transactionService.CreateTransaction(TransactionMockData.NewTransactionRequest)
+                .ReturnsForAnyArgs(new TransactionResponse { Message = TransactionMockData.CreateResponse });
 
             // Act
-            var response = await _accountTransactionsController.CreateTransaction(TransactionMockData.CreateOrUpdateTransactionRequest);
+            var response = await _accountTransactionsController.CreateTransaction(TransactionMockData.NewTransactionRequest);
 
             // Assert
             var okResult = (OkObjectResult)response.Result;
             okResult.Should().NotBeNull();
             okResult.StatusCode.Should().Be(200);
-            okResult.Value.Should().Be("Transaction created");
+            ((TransactionResponse)okResult.Value).Message.Should().Be("Transaction created");
         }
 
         [Fact]
         public async Task should_return_updated_response_when_update_transaction()
         {
             //arrange
-            _transactionService.UpdateTransaction(TransactionMockData.CreateOrUpdateTransactionRequest, TransactionMockData.RequestTransactionId)
-                .ReturnsForAnyArgs(TransactionMockData.UpdatedResponse);
+            _transactionService.UpdateTransaction(TransactionMockData.ExistingTransactionRequest, TransactionMockData.ExistingTransactionId)
+                .ReturnsForAnyArgs(new TransactionResponse { Message = TransactionMockData.UpdatedResponse });
 
             // Act
-            var response = await _accountTransactionsController.UpdateTransaction(TransactionMockData.CreateOrUpdateTransactionRequest,
-                "6976fe63-c665-445b-835c-42dabe9fa3b7");
+            var response = await _accountTransactionsController.UpdateTransaction(TransactionMockData.ExistingTransactionRequest,
+                TransactionMockData.ExistingTransactionId);
 
             // Assert
             var okResult = (OkObjectResult)response.Result;
             okResult.Should().NotBeNull();
             okResult.StatusCode.Should().Be(200);
-            okResult.Value.Should().Be("Transaction updated");
+            ((TransactionResponse)okResult.Value).Message.Should().Be("Transaction updated");
+        }
+
+        [Fact]
+        public async Task should_return_badrequest_response_when_transaction_already_exists()
+        {
+            //arrange
+            _transactionService.CreateTransaction(TransactionMockData.ExistingTransactionRequest)
+                .Throws(new HttpResponseException
+                {
+                    Status = 400,
+                    Value = TransactionMockData.TransactionExists
+                });
+
+            // Act
+            Func<Task> act = async () => await _accountTransactionsController.CreateTransaction(TransactionMockData.ExistingTransactionRequest);
+
+            // Assert
+            await act.Should().ThrowAsync<HttpResponseException>();
+        }
+
+        [Fact]
+        public async Task should_return_badrequest_response_when_transaction_doesnot_exist()
+        {
+            //arrange
+            _transactionService.UpdateTransaction(TransactionMockData.NewTransactionRequest, TransactionMockData.ExistingTransactionId)
+                .Throws(new HttpResponseException
+                {
+                    Status = 400,
+                    Value = TransactionMockData.TransactionDoesNotExists
+                });
+
+            // Act
+            Func<Task> act = async () => await _accountTransactionsController.UpdateTransaction(TransactionMockData.NewTransactionRequest,
+                TransactionMockData.ExistingTransactionId);
+
+            // Assert
+            await act.Should().ThrowAsync<HttpResponseException>();
         }
     }
 }

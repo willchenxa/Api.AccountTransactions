@@ -10,6 +10,7 @@ namespace Api.AccountTransactions.Validator
             RuleFor(transcation => transcation.id).NotEmpty().WithMessage(GetValidatorError()).MinimumLength(36).WithMessage(GetLengthValidatorError());
             RuleFor(transcation => transcation.fromAccount).NotEmpty().WithMessage(GetValidatorError());
             RuleFor(transcation => transcation.toAccount).NotEmpty().WithMessage(GetValidatorError());
+            RuleFor(transcation => transcation.description).NotEmpty().WithMessage(GetValidatorError());
             RuleFor(transcation => transcation.amount).NotEmpty().WithMessage(GetValidatorError());
             RuleFor(transcation => transcation.date).NotEmpty().WithMessage(GetValidatorError());
             RuleFor(transcation => transcation.owner).NotEmpty().WithMessage(GetValidatorError());
@@ -18,12 +19,12 @@ namespace Api.AccountTransactions.Validator
 
         private string GetValidatorError()
         {
-            return "'{PropertyName}' must not be empty for Transaction.";
+            return "'{PropertyName}' is required";
         }
 
         private string GetLengthValidatorError()
         {
-            return "'{PropertyName}' must not less than 36 characters for Transaction.";
+            return "'{PropertyName}' must not less than 36 characters for Transaction";
         }
     }
 }

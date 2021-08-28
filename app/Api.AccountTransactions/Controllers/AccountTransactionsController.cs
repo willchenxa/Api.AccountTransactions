@@ -1,4 +1,5 @@
 ﻿using Api.AccountTransactions.Dtos;
+using Api.AccountTransactions.Filter;
 using Api.AccountTransactions.Services;
 using Api.AccountTransactions.Swagger;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +14,8 @@ namespace Api.AccountTransactions.Controllers
 {
     [ApiController]
     [Route("api/transactions")]
+    [ValidationFilter]
+    //[Authorize]
     public class AccountTransactionsController : ControllerBase
     {
         private readonly ITransactionService _service;
@@ -38,9 +41,10 @@ namespace Api.AccountTransactions.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [SwaggerResponse(200, "Posts a new transaction to a specific account", typeof(string))]
+        [SwaggerResponse(200, "Posts a new transaction to a specific account", typeof(TransactionResponse))]
         [SwaggerRequestExample(typeof(Transaction), typeof(SwaggerExamples.TransactionRequestExample))]
-        public async Task<ActionResult<string>> CreateTransaction(Transaction transaction)
+        [SwaggerResponseExample(200, typeof(SwaggerExamples.CreatedTransactionExample))]
+        public async Task<ActionResult<TransactionResponse>> CreateTransaction(Transaction transaction)
         {
             return Ok(await _service.CreateTransaction(transaction));
         }
@@ -51,7 +55,7 @@ namespace Api.AccountTransactions.Controllers
         [SwaggerResponse(200, "Updates a transaction", typeof(string))]
         [SwaggerRequestExample(typeof(Transaction), typeof(SwaggerExamples.TransactionRequestExample))]
         [SwaggerResponseExample(200, typeof(SwaggerExamples.UpdateTransactionExample))]
-        public async Task<ActionResult<string>> UpdateTransaction([FromBody] Transaction transaction, string transactionID)
+        public async Task<ActionResult<TransactionResponse>> UpdateTransaction([FromBody] Transaction transaction, string transactionID)
         {
             return Ok(await _service.UpdateTransaction(transaction, transactionID));
         }
