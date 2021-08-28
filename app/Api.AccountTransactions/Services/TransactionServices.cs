@@ -1,35 +1,38 @@
 ﻿using Api.AccountTransactions.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 namespace Api.AccountTransactions.Services
 {
     public interface ITransactionService
     {
-        Task<IEnumerable<Transaction>> GetAccountTractions();
-        Task CreateTrasaction(Transaction transaction);
-        Task UpdateTransaction(Transaction transaction);
+        Task<IEnumerable<Transaction>> GetAccountTransactions();
+        Task<string> CreateTransaction(Transaction transaction);
+        Task<string> UpdateTransaction(Transaction transaction, string transactionID);
 
     }
     public class TransactionService : ITransactionService
     {
         private readonly List<Transaction> _inMemoryTransactions = new List<Transaction>();
 
-        public Task CreateTrasaction(Transaction transaction)
+        public Task<string> CreateTransaction(Transaction transaction)
         {
             _inMemoryTransactions.Add(transaction);
 
-            return Task.CompletedTask;
+            return Task.FromResult(Constant.TransactionResponse.CreatedSuccessful);
         }
 
-        public async Task<IEnumerable<Transaction>> GetAccountTractions()
+        public async Task<IEnumerable<Transaction>> GetAccountTransactions()
         {
             return await Task.FromResult(_inMemoryTransactions);
         }
 
-        public Task UpdateTransaction(Transaction transaction)
+        public async Task<string> UpdateTransaction(Transaction transaction, string transactionID)
         {
-            return Task.CompletedTask;
+            var updateTransactionIndex = _inMemoryTransactions.FindIndex(t => t.id == transactionID);
+
+            _inMemoryTransactions[updateTransactionIndex] = transaction;
+
+            return await Task.FromResult(Constant.TransactionResponse.UpdatedSucessful);
         }
     }
 }
