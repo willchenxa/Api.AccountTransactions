@@ -13,7 +13,6 @@ namespace Api.AccountTransaction.UnitTests.Services
     {
         private readonly TransactionContextFixture _fixture;
         private readonly TransactionService _service;
-        private readonly string _nonexisttransactionId = "6976fe63-c665-445b-835c-42dabe9fa3b0";
 
         public ServiceTests(TransactionContextFixture fixture)
         {
