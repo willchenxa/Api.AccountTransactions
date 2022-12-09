@@ -1,7 +1,4 @@
-﻿using Api.AccountTransactions.Dtos;
-using System.Collections.Generic;
-
-namespace Api.AccountTransaction.UnitTests.MockData
+﻿namespace Api.AccountTransaction.UnitTests.MockData
 {
     public static class TransactionMockData
     {

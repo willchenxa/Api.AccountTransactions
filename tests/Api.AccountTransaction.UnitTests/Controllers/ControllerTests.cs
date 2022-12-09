@@ -1,16 +1,8 @@
-using Api.AccountTransaction.UnitTests.MockData;
-using Api.AccountTransactions.Controllers;
-using Api.AccountTransactions.Dtos;
-using Api.AccountTransactions.Exception;
-using Api.AccountTransactions.Services;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using NSubstitute;
-using NSubstitute.ExceptionExtensions;
-using System;
-using System.Threading.Tasks;
-using Xunit;
+global using Api.AccountTransactions.Controllers;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Logging;
+global using NSubstitute;
+global using NSubstitute.ExceptionExtensions;
 
 namespace Api.AccountTransaction.UnitTests
 {

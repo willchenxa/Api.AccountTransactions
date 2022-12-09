@@ -1,11 +1,6 @@
-﻿using Api.AccountTransaction.UnitTests.MockData;
-using Api.AccountTransactions.Exception;
-using Api.AccountTransactions.Services;
-using FluentAssertions;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
+﻿global using Api.AccountTransactions.Exception;
+global using Api.AccountTransactions.Services;
+global using System.Threading.Tasks;
 
 namespace Api.AccountTransaction.UnitTests.Services
 {

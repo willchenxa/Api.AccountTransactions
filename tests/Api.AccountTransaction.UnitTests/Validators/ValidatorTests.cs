@@ -1,12 +1,11 @@
-﻿using Api.AccountTransactions.Dtos;
-using Api.AccountTransactions.Validator;
-using FluentAssertions;
-using FluentAssertions.Execution;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
+﻿global using Api.AccountTransactions.Dtos;
+global using Api.AccountTransactions.Validator;
+global using FluentAssertions;
+global using FluentAssertions.Execution;
+global using FluentValidation;
+global using System.Collections.Generic;
+global using System.Linq;
+global using Xunit;
 
 namespace Api.AccountTransaction.UnitTests.Validators
 {

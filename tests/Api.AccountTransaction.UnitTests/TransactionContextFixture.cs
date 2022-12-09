@@ -1,7 +1,7 @@
-﻿using Api.AccountTransaction.UnitTests.MockData;
-using Api.AccountTransactions.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿global using Api.AccountTransaction.UnitTests.MockData;
+global using Api.AccountTransactions.Models;
+global using Microsoft.EntityFrameworkCore;
+global using System;
 
 namespace Api.AccountTransaction.UnitTests
 {
