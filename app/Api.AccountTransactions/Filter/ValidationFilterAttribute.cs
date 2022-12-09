@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace Api.AccountTransactions.Filter
+﻿namespace Api.AccountTransactions.Filter
 {
     public class ValidationFilterAttribute : ActionFilterAttribute
     {

@@ -7,5 +7,3 @@ It has the following endpoints:
 - GET Transactions: get all transactions
 - POST Transactions: add a new transaction item
 - PUT Transaction: modify a transaction with transaction ID
-
-test ssh

@@ -1,7 +1,4 @@
-﻿using Api.AccountTransactions.Dtos;
-using FluentValidation;
-
-namespace Api.AccountTransactions.Validator
+﻿namespace Api.AccountTransactions.Validator
 {
     public class TransactionValidator : AbstractValidator<Transaction>
     {

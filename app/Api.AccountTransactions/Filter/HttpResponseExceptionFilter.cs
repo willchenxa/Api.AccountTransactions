@@ -1,6 +1,5 @@
-﻿using Api.AccountTransactions.Exception;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿global using Api.AccountTransactions.Exception;
+global using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Api.AccountTransactions.Filter
 {

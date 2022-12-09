@@ -1,7 +1,4 @@
-﻿using Api.AccountTransactions.Dtos;
-using Microsoft.EntityFrameworkCore;
-
-namespace Api.AccountTransactions.Models
+﻿namespace Api.AccountTransactions.Models
 {
     public class TransactionDbContext : DbContext
     {

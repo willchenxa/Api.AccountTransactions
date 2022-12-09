@@ -1,14 +1,6 @@
-﻿using Api.AccountTransactions.Dtos;
-using Api.AccountTransactions.Filter;
-using Api.AccountTransactions.Services;
-using Api.AccountTransactions.Swagger;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Swashbuckle.AspNetCore.Filters;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Api.AccountTransactions.Controllers
 {

@@ -1,8 +1,4 @@
-﻿using Api.AccountTransactions.Dtos;
-using Swashbuckle.AspNetCore.Filters;
-using System.Collections.Generic;
-
-namespace Api.AccountTransactions.Swagger
+﻿namespace Api.AccountTransactions.Swagger
 {
     public class SwaggerExamples
     {
