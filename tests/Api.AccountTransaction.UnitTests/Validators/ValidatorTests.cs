@@ -175,7 +175,7 @@ namespace Api.AccountTransaction.UnitTests.Validators
                             name = "John Smith"
                         }
                     },
-                    "'id' must not less than 36 characters for Transaction"
+                    "'id' must not be less than 36 characters for Transaction"
                 }
             };
     }

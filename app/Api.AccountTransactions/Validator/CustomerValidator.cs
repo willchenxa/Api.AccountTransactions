@@ -2,22 +2,11 @@
 {
     public class CustomerValidator : AbstractValidator<Customer>
     {
+
         public CustomerValidator()
         {
-            RuleFor(customer => customer.id).NotEmpty().WithMessage(GetValidatorError()).MinimumLength(36).WithMessage(GetLengthValidatorError());
-            RuleFor(customer => customer.name).NotEmpty().WithMessage(GetValidatorError());
+            RuleFor(customer => customer.id).NotEmpty().WithMessage(ValidatorErrorMessages.GetValidatorError).MinimumLength(36).WithMessage(ValidatorErrorMessages.GetLengthValidatorErrorForCustomer);
+            RuleFor(customer => customer.name).NotEmpty().WithMessage(ValidatorErrorMessages.GetValidatorError);
         }
-        private string GetValidatorError()
-        {
-            return "'{PropertyName}' is required";
-        }
-
-        private string GetLengthValidatorError()
-        {
-            return "'{PropertyName}' must not be less than 36 characters for Customer";
-        }
-
     }
-
-
 }

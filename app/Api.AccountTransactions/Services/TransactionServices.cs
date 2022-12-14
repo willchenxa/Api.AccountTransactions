@@ -27,7 +27,7 @@ namespace Api.AccountTransactions.Services
                 throw new HttpResponseException
                 {
                     Status = 400,
-                    Value = Constant.TransactionResponse.TransactionExists
+                    Value = Constant.TransactionResponseMessages.TransactionExists
                 };
 
             SetCustomerState(transaction);
@@ -36,7 +36,7 @@ namespace Api.AccountTransactions.Services
             _dbContext.Set<Transaction>().Add(transaction);
             _dbContext.SaveChanges();
 
-            return Task.FromResult(new TransactionResponse { Message = Constant.TransactionResponse.CreatedSuccessful });
+            return Task.FromResult(new TransactionResponse { Message = Constant.TransactionResponseMessages.CreatedSuccessful });
         }
 
         public async Task<IEnumerable<Transaction>> GetAccountTransactions()
@@ -53,7 +53,7 @@ namespace Api.AccountTransactions.Services
                 throw new HttpResponseException
                 {
                     Status = 400,
-                    Value = Constant.TransactionResponse.TransactionDoesNotExists
+                    Value = Constant.TransactionResponseMessages.TransactionDoesNotExists
                 };
 
             SetCustomerState(transaction);
@@ -61,7 +61,7 @@ namespace Api.AccountTransactions.Services
             _dbContext.Entry(entity).CurrentValues.SetValues(transaction);
             _dbContext.SaveChanges();
 
-            return await Task.FromResult(new TransactionResponse { Message = Constant.TransactionResponse.UpdatedSucessful });
+            return await Task.FromResult(new TransactionResponse { Message = Constant.TransactionResponseMessages.UpdatedSucessful });
         }
 
         private void SetCustomerState(Transaction transaction)
