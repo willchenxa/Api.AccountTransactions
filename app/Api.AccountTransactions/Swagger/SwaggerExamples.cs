@@ -82,7 +82,7 @@
         {
             public TransactionResponse GetExamples()
             {
-                return new TransactionResponse { Message = Constant.TransactionResponse.CreatedSuccessful };
+                return new TransactionResponse { Message = Constant.TransactionResponseMessages.CreatedSuccessful };
             }
         }
 
@@ -90,7 +90,7 @@
         {
             public TransactionResponse GetExamples()
             {
-                return new TransactionResponse { Message = Constant.TransactionResponse.UpdatedSucessful };
+                return new TransactionResponse { Message = Constant.TransactionResponseMessages.UpdatedSucessful };
             }
         }
     }
