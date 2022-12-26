@@ -60,8 +60,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: pwsh
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"willchenxa_Api.AccountTransactions" /o:"willchenxa" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          Api.AccountTransactions
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"willchenxa_Api.AccountTransactions" /o:"willchenxa" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" Api.AccountTransactions
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       - name: Pack
         run: dotnet pack app/Api.AccountTransactions/Api.AccountTransactions.csproj -c Release --no-restore --no-build --include-symbols -p:SymbolPackageFormat=snupkg -o .
