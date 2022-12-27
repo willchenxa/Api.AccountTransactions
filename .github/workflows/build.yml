@@ -33,10 +33,6 @@ jobs:
             ${{ runner.os }}-nuget
       - name: Install dependencies
         run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-build --configuration Release --verbosity normal
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
@@ -62,7 +58,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: pwsh
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"willchenxa_Api.AccountTransactions" /o:"willchenxa" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" Api.AccountTransactions
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"willchenxa_Api.AccountTransactions" /o:"willchenxa" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build --configuration Release --no-restore
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      - name: Test
+        run: dotnet test --no-build --configuration Release --verbosity normal
       - name: Pack
         run: dotnet pack app/Api.AccountTransactions/Api.AccountTransactions.csproj -c Release --no-restore --no-build --include-symbols -p:SymbolPackageFormat=snupkg -o .
