@@ -2,7 +2,7 @@
 
 This project is the demo project for .net 6 api and CI pipeline showcase.
 
-[![Test](https://github.com/willchenxa/Api.AccountTransactions/workflows/Api.AccountTransactions/badge.svg)](https://github.com/willchenxa/Api.AccountTransactions/actions)
+![Solution actions stauts](https://github.com/willchenxa/Api.AccountTransactions/actions/workflows/build.yml/badge.svg)
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=willchenxa_Api.AccountTransactions&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=willchenxa_Api.AccountTransactions)
 
